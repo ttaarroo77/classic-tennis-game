@@ -108,10 +108,14 @@
         const ball = {
             x: canvas.width / 2,
             y: canvas.height / 2,
-            radius: 8,
+            radius: 18,
             dx: 8,
             dy: 6
         };
+        
+        // ボール画像
+        const ballImage = new Image();
+        ballImage.src = 'images/face01.svg';
         
         // キーボード入力
         const keys = {};
@@ -132,10 +136,14 @@
         
         // ボールを描画
         function drawBall() {
-            ctx.fillStyle = '#fff';
-            ctx.beginPath();
-            ctx.arc(ball.x, ball.y, ball.radius, 0, Math.PI * 2);
-            ctx.fill();
+            if (ballImage.complete) {
+                ctx.drawImage(ballImage, ball.x - ball.radius, ball.y - ball.radius, ball.radius * 2, ball.radius * 2);
+            } else {
+                ctx.fillStyle = '#fff';
+                ctx.beginPath();
+                ctx.arc(ball.x, ball.y, ball.radius, 0, Math.PI * 2);
+                ctx.fill();
+            }
         }
         
         // 中央線を描画
